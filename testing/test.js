@@ -15,3 +15,7 @@ const timer = require('../timer/timer.js');
 let myTimer = new timer(1);
 
 myTimer.start();
+
+setTimeout(() => {
+myTimer.stop()
+}, 3000);

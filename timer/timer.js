@@ -1,5 +1,6 @@
 const timer = function(inputMinutes = 25) {
   this.countDownFrom = inputMinutes * 5;
+  this.intervalId = 0;
 };
 
 timer.prototype.getCountDownFrom = function() {
@@ -14,17 +15,18 @@ timer.prototype.start = function() {
   // initiate a variable to setInterval to store intervalID
   let count = this.countDownFrom;
 
-  const countDown = function() {
-    console.log(count);
+  this.intervalId = setInterval(() => {
+    console.log(`00:${count}`);
     count--;
-    if (count === 0) {
-      clearInterval(intervalId);
+    if (count < 0) {
+      this.stop();
     }
-    return count;
-  }
-  let intervalId = setInterval(countDown, 1000);
+  }, 1000);
 }
 
+timer.prototype.stop = function() {
+  clearInterval(this.intervalId);
+}
 
 
 module.exports = timer;
