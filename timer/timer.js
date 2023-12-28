@@ -17,7 +17,7 @@ timer.prototype.getCountDownFrom = function() {
 timer.prototype.setCountDownFrom = function(inputHours, inputMinutes) {
   if (inputMinutes < 0) return 'Invalid Input';
 
-  this.countDownFrom =   this.countDownFrom = (inputHours * 60 * 60) + (inputMinutes * 60);
+  this.countDownFrom = (inputHours * 60 * 60) + (inputMinutes * 60);
   return this.countDownFrom;
 }
 
@@ -31,8 +31,10 @@ timer.prototype.start = function(callback, stopCallback) {
   this.timeLeft = this.timeLeft > 0 ? this.timeLeft : this.countDownFrom;
 
   this.intervalId = setInterval(() => {
+    let [minutes, seconds] = [Math.floor(this.timeLeft / 60), (this.timeLeft % 60)]
+
+    callback([minutes, seconds]);
     this.timeLeft--;
-    callback(this.timeLeft);
     if (this.timeLeft < 0 || !this.timeLeft) {
       this.stop(stopCallback);
     }
@@ -55,3 +57,6 @@ timer.prototype.reset = function() {
 
 module.exports = timer;
 
+// To do:
+
+// Accept dates
