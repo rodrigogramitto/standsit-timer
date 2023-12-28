@@ -1,6 +1,7 @@
 const timer = function(inputMinutes = 25) {
-  this.countDownFrom = inputMinutes * 5;
+  this.countDownFrom = (inputMinutes * 60) + 1;
   this.intervalId = 0;
+  this.timeLeft = 0;
 };
 
 timer.prototype.getCountDownFrom = function() {
@@ -8,17 +9,16 @@ timer.prototype.getCountDownFrom = function() {
 }
 
 timer.prototype.setCountDownFrom = function(inputMinutes) {
-  this.countDownFrom = inputMinutes * 60;
+  this.countDownFrom = (inputMinutes * 60) + 1;
 }
 
 timer.prototype.start = function() {
   // initiate a variable to setInterval to store intervalID
-  let count = this.countDownFrom;
+  this.timeLeft = this.countDownFrom
 
   this.intervalId = setInterval(() => {
-    console.log(`00:${count}`);
-    count--;
-    if (count < 0) {
+    this.timeLeft--;
+    if (this.timeLeft < 0) {
       this.stop();
     }
   }, 1000);
@@ -30,4 +30,16 @@ timer.prototype.stop = function() {
 
 
 module.exports = timer;
+
+// To-Do:
+
+// Make sure count is the right value
+// accept hours as input
+
+const myTimer = new timer();
+
+
+myTimer.start();
+
+setInterval(() => {console.log(myTimer.timeLeft)}, 1000);
 

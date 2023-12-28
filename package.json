@@ -1,6 +1,28 @@
 {
   "dependencies": {
-    "date-fns": "^2.30.0",
-    "jest": "^29.7.0"
-  }
+    "date-fns": "^2.30.0"
+  },
+  "name": "standsit-timer",
+  "description": "Timer package that counts down from specified minutes & seconds",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodrigogramitto/standsit-timer.git"
+  },
+  "keywords": [
+    "timer",
+    "countdown",
+    "pomodoro"
+  ],
+  "author": "Rodrigo Gramitto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rodrigogramitto/standsit-timer/issues"
+  },
+  "homepage": "https://github.com/rodrigogramitto/standsit-timer#readme"
 }
