@@ -53,6 +53,9 @@ Sets a new countdown value based on the provided hours and minutes. If negative 
 
 Starts the countdown timer. The `callback` function is called every second with the current time left. The `stopCallback` function is optional and is called when the timer reaches zero or is manually stopped.
 
+The callback will be called with an argument array that contains minutes and seconds [minutes, seconds]
+ex: callback([minutes, seconds])
+
 ### `stop(callback)`
 
 Stops the countdown timer. The optional `callback` function is called after the timer is stopped.
@@ -60,6 +63,7 @@ Stops the countdown timer. The optional `callback` function is called after the 
 ### `reset()`
 
 Resets the timer, setting the remaining time to 0.
+When start gets called again, it will start from the user inputted time.
 
 ## License
 
