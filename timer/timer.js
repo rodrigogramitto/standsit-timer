@@ -36,10 +36,3 @@ module.exports = timer;
 // Make sure count is the right value
 // accept hours as input
 
-const myTimer = new timer();
-
-
-myTimer.start();
-
-setInterval(() => {console.log(myTimer.timeLeft)}, 1000);
-
