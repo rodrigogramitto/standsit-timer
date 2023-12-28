@@ -1,5 +1,11 @@
-const timer = function(inputMinutes = 25) {
-  this.countDownFrom = (inputMinutes * 60) + 1;
+const timer = function(inputHours = 0, inputMinutes = 25) {
+
+  if (inputHours < 0 || inputMinutes < 0) {
+    console.error('Invalid input, please enter positive values');
+    return;
+  }
+
+  this.countDownFrom = (inputHours * 60 * 60) + (inputMinutes * 60) ;
   this.intervalId = 0;
   this.timeLeft = 0;
 };
@@ -8,38 +14,44 @@ timer.prototype.getCountDownFrom = function() {
   return this.countDownFrom;
 }
 
-timer.prototype.setCountDownFrom = function(inputMinutes) {
-  this.countDownFrom = (inputMinutes * 60) + 1;
+timer.prototype.setCountDownFrom = function(inputHours, inputMinutes) {
+  if (inputMinutes < 0) return 'Invalid Input';
+
+  this.countDownFrom =   this.countDownFrom = (inputHours * 60 * 60) + (inputMinutes * 60);
+  return this.countDownFrom;
 }
 
-timer.prototype.start = function() {
-  // initiate a variable to setInterval to store intervalID
-  this.timeLeft = this.countDownFrom
+timer.prototype.start = function(callback, stopCallback) {
+
+  if (this.countDownFrom < 0) {
+    console.error('Invalid countdown values');
+    return;
+  };
+
+  this.timeLeft = this.timeLeft > 0 ? this.timeLeft : this.countDownFrom;
 
   this.intervalId = setInterval(() => {
     this.timeLeft--;
-    if (this.timeLeft < 0) {
-      this.stop();
+    callback(this.timeLeft);
+    if (this.timeLeft < 0 || !this.timeLeft) {
+      this.stop(stopCallback);
     }
   }, 1000);
 }
 
-timer.prototype.stop = function() {
+timer.prototype.stop = function(callback) {
+  if (!callback) {
+    callback = () => {};
+  }
   clearInterval(this.intervalId);
+  return callback();
+}
+
+timer.prototype.reset = function() {
+  this.timeLeft = 0;
+  return;
 }
 
 
 module.exports = timer;
-
-// To-Do:
-
-// Make sure count is the right value
-// accept hours as input
-
-const myTimer = new timer();
-
-
-myTimer.start();
-
-setInterval(() => {console.log(myTimer.timeLeft)}, 1000);
 
