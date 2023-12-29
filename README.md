@@ -59,6 +59,7 @@ ex: callback([minutes, seconds])
 ### `stop(callback)`
 
 Stops the countdown timer. The optional `callback` function is called after the timer is stopped.
+It's important to note that this callback is a different callback than the one passed to start function (stopCallback).
 
 ### `reset()`
 

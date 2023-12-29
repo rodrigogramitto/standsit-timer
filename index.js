@@ -1,3 +1,3 @@
-const timer = require('./timer/timer.js');
+const Timer = require('./timer/timer.js');
 
-exports.timer = timer
+exports.timer = Timer
