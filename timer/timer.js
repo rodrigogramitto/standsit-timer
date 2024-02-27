@@ -1,4 +1,4 @@
-const Timer = function(inputHours = 0, inputMinutes = 25) {
+const timer = function(inputHours = 0, inputMinutes = 25) {
 
   if (inputHours < 0 || inputMinutes < 0) {
     console.error('Invalid input, please enter positive values');
@@ -54,11 +54,8 @@ timer.prototype.reset = function() {
   return;
 }
 
-
-module.exports = Timer;
+module.exports = timer;
 
 // To do:
-
-
 // Refactor arguments to take array of arguments
 // Accept dates
