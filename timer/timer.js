@@ -15,7 +15,7 @@ timer.prototype.getCountDownFrom = function() {
 }
 
 timer.prototype.setCountDownFrom = function(inputHours, inputMinutes) {
-  if (inputMinutes < 0) return 'Invalid Input';
+  if (inputMinutes < 0 || inputHours < 0) return 'Invalid Input';
 
   this.countDownFrom = (inputHours * 60 * 60) + (inputMinutes * 60);
   return this.countDownFrom;

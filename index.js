@@ -1,3 +1,5 @@
 const Timer = require('./timer/timer.js');
+const Pomodoro = require('./pomodoro_timer/pomodoro_timer.js');
 
-exports.timer = Timer
+exports.Timer = Timer
+exports.Pomodoro = Pomodoro
