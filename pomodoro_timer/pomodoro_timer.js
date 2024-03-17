@@ -96,6 +96,7 @@ Pomodoro.prototype.stopRest = function(callback) {
   return callback()
 }
 
+// Todo: add logic to permanently alternate between work and rest untill stop is called;
 Pomodoro.prototype.start = function(workStartCb, workStopCb, restStartCb, restStopCb) {
   this.startWork(workStartCb, workStopCb, restStartCb, restStopCb);
 }
@@ -106,10 +107,14 @@ Pomodoro.prototype.reset = function() {
   return;
 }
 
+Pomodoro.prototype.stop = function() {
+  clearInterval(this.workIntervalId);
+  clearInterval(this.restIntervalId);
+  this.reset();
+}
+
 Pomodoro.prototype.pause = function () {
   // add logic to be able to pause and restart where it left off
 }
-
-// Todo add setters and getters for rest times
 
 module.exports = Pomodoro;
