@@ -18,6 +18,8 @@ npm install standsit-timer
 // I am working towards including several timer classes within the package
 // For the default timer use .timer after require.
 const Timer = require('my-countdown-timer').timer;
+// For the pomodoro timer use .pomodoro after require
+const Pomodoro = require('my-countdown-timer').pomodoro;
 
 // Create a new timer with default values (0 hours, 25 minutes)
 const myTimer = new Timer();
@@ -65,6 +67,46 @@ It's important to note that this callback is a different callback than the one p
 
 Resets the timer, setting the remaining time to 0.
 When start gets called again, it will start from the user inputted time.
+
+### Pomodoro Timer
+
+This Pomodoro Timer extends the functionality of the basic countdown timer, adding features specifically tailored for the Pomodoro technique. It allows for alternating between work and rest intervals, with customizable durations for each.
+
+
+const Pomodoro = require('../timer/timer.js').pomodoro;
+
+// Create a new Pomodoro timer with default work and rest durations (25 minutes work, 5 minutes rest)
+const myPomodoro = new Pomodoro();
+
+// Start the Pomodoro timer with callbacks for work and rest intervals
+myPomodoro.start(workStartCallback, workStopCallback, restStartCallback, restStopCallback);
+
+// Stop the Pomodoro timer
+myPomodoro.stop();
+API
+new Pomodoro([workInputHours], [workInputMinutes], [restInputHours], [restInputMinutes])
+Creates a new Pomodoro timer with specified initial work and rest durations in hours and minutes. Default values are 25 minutes for work and 5 minutes for rest. If negative values are provided, an error will be logged, and the timer won't be created.
+
+getWorkTime()
+Returns the duration of the work interval in seconds.
+
+setWorkTime(inputHours, inputMinutes)
+Sets a new duration for the work interval based on the provided hours and minutes. If negative values are provided, the function returns an 'Invalid Input' message.
+
+getRestTime()
+Returns the duration of the rest interval in seconds.
+
+setRestTime(inputHours, inputMinutes)
+Sets a new duration for the rest interval based on the provided hours and minutes. If negative values are provided, the function returns an 'Invalid Input' message.
+
+start(workStartCallback, workStopCallback, restStartCallback, restStopCallback)
+Starts the Pomodoro timer, alternating between work and rest intervals. Callback functions are provided for each interval to handle start and stop events.
+
+stop()
+Stops the Pomodoro timer.
+
+reset()
+Resets the Pomodoro timer, setting both work and rest intervals to their initial durations.
 
 ## License
 
