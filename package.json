@@ -4,7 +4,7 @@
   },
   "name": "standsit-timer",
   "description": "Timer package that counts down from specified minutes & seconds",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "main": "index.js",
   "devDependencies": {},
   "scripts": {

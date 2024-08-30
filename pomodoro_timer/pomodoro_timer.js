@@ -8,6 +8,8 @@ const Pomodoro = function(workInputHours = 0, workInputMinutes = 25, restInputHo
   this.restTimeLeft = 0;
   this.workIntervalId = this.intervalId;
   this.restIntervalId = 0;
+  this.isPaused = false;
+  this.currentState = null;
 };
 
 Pomodoro.prototype = Object.create(Timer.prototype);
@@ -41,7 +43,9 @@ Pomodoro.prototype.startWork = function(startCallback, stopCallback, restStartCb
     console.error('Invalid work time values');
     return;
   };
+
   this.workTimeLeft = this.workTimeLeft > 0 ? this.workTimeLeft : this.workTime;
+  this.currentState = 'work';
 
   this.workIntervalId = setInterval(() => {
     let [minutes, seconds] = [Math.floor(this.workTimeLeft / 60), (this.workTimeLeft % 60)];
@@ -75,7 +79,9 @@ Pomodoro.prototype.startRest = function(startCallback, stopCallback) {
     console.error('Invalid work time values');
     return;
   };
+
   this.restTimeLeft = this.restTimeLeft > 0 ? this.restTimeLeft : this.restTime;
+  this.currentState = 'work';
 
   this.restIntervalId = setInterval(() => {
     let [minutes, seconds] = [Math.floor(this.restTimeLeft / 60), (this.restTimeLeft % 60)];
@@ -114,7 +120,27 @@ Pomodoro.prototype.stop = function() {
 }
 
 Pomodoro.prototype.pause = function () {
-  // add logic to be able to pause and restart where it left off
+  if (this.currentState === 'work') {
+    clearInterval(this.workIntervalId);
+  } else if (this.currentState === 'rest') {
+    clearInterval(this.restIntervalId);
+  }
+  this.isPaused = true;
+}
+
+
+Pomodoro.prototype.resume = function(workStartCb, workStopCb, restStartCb, restStopCb) {
+  if (!this.isPaused) {
+    console.error('Timer is not paused.');
+    return;
+  }
+
+  this.isPaused = false;
+  if (this.currentState === 'work') {
+    this.startWork(workStartCb, workStopCb, restStartCb, restStopCb);
+  } else if (this.currentState === 'rest') {
+    this.startRest(restStartCb, restStopCb);
+  }
 }
 
 module.exports = Pomodoro;
